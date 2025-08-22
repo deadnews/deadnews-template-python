@@ -4,6 +4,7 @@
 
 ### Chores
 
+- _(git-cliff)_ update config - ([a5aaac2](https://github.com/deadnews/deadnews-template-python/commit/a5aaac2c6b7db55b82d139285098220e48e6ba04))
 - standardize repository references ([#338](https://github.com/deadnews/deadnews-template-python/issues/338)) - ([66ba227](https://github.com/deadnews/deadnews-template-python/commit/66ba22754759265517d9f2326f9ad423156eb00f))
 
 ## [2.1.0](https://github.com/deadnews/deadnews-template-python/compare/v2.0.11...v2.1.0) - 2025-07-05
