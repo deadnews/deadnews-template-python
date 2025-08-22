@@ -13,7 +13,7 @@ update:
 run:
 	uv run uvicorn --reload deadnews_template_python:app
 
-check: pc install lint test
+check: pc lint test
 pc:
 	pre-commit run -a
 lint:
