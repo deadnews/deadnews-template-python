@@ -17,7 +17,7 @@ PyPI
 ```sh
 pip install deadnews-template-python
 # or
-pipx install deadnews-template-python
+uv tool install deadnews-template-python
 ```
 
 Docker
