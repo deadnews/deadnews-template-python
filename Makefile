@@ -3,7 +3,6 @@
 default: check
 
 install:
-	prek install
 	uv sync
 lock:
 	uv lock
