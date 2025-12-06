@@ -18,7 +18,7 @@ repos:
         args: [--fix=lf]
 
   - repo: https://github.com/rbubley/mirrors-prettier
-    rev: v3.7.2
+    rev: v3.7.4
     hooks:
       - id: prettier
 
@@ -44,7 +44,7 @@ repos:
       - id: taplo-format
 
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.14.7
+    rev: v0.14.8
     hooks:
       - id: ruff-format
       - id: ruff-check
