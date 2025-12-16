@@ -13,9 +13,8 @@ dependencies = ["fastapi>=0.122.0", "pydantic>=2.12.5", "uvicorn>=0.38.0"]
 
 [dependency-groups]
 dev = [
-  "mypy>=1.19.0",
-  "pyright>=1.1.407",
   "ruff>=0.14.7",
+  "ty>=0.0.2",
   "pytest>=9.0.1",
   "pytest-cov>=7.0.0",
   "httpx>=0.28.1",
@@ -81,20 +80,3 @@ exclude_lines = [
   "if __name__ == .__main__.:",
   "if TYPE_CHECKING:",
 ]
-
-[tool.mypy]
-disallow_untyped_defs  = true
-follow_imports         = "normal"
-ignore_missing_imports = true
-show_column_numbers    = true
-show_error_codes       = true
-warn_unused_ignores    = true
-
-[[tool.mypy.overrides]]
-module                = ["tests.*"]
-disallow_untyped_defs = false
-
-[tool.pyright]
-include          = ["src"]
-ignore           = ["tests"]
-typeCheckingMode = "standard"
