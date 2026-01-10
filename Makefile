@@ -2,17 +2,6 @@
 
 default: check
 
-install:
-	uv sync
-lock:
-	uv lock
-update:
-	uv sync --upgrade
-	prek auto-update
-
-run:
-	uv run uvicorn --reload deadnews_template_python:app
-
 check: pc lint test
 pc:
 	prek run -a
@@ -22,6 +11,19 @@ lint:
 	uv run ty check .
 test:
 	uv run pytest
+
+install:
+	uv sync
+
+update: up up-ci
+up:
+	uv sync --upgrade
+up-ci:
+	prek auto-update
+	pinact run -update
+
+run:
+	uv run uvicorn --reload deadnews_template_python:app
 
 doc:
 	uv run mkdocs serve
