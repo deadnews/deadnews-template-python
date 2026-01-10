@@ -129,6 +129,9 @@ cython_debug/
 # ruff
 .ruff_cache/
 
+# todo
+*.todo.md
+
 # vscode
 .vscode/*
 !.vscode/settings.json
@@ -136,6 +139,3 @@ cython_debug/
 !.vscode/launch.json
 !.vscode/extensions.json
 !.vscode/*.code-snippets
-
-# temp
-.temp.md

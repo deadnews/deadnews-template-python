@@ -1,4 +1,4 @@
-.PHONY: all clean default install lock update check pc test docs run
+.PHONY: all clean default install lock update up check pc test docs run
 
 default: check
 
