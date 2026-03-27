@@ -90,11 +90,11 @@ jobs:
 
       - name: Create GitHub Release
         run: |
-          gh release create ${GITHUB_REF_NAME} \
-            --title ${GITHUB_REF_NAME} \
+          gh release create "${GITHUB_REF_NAME}" \
+            --title "${GITHUB_REF_NAME}" \
             --notes="See [the CHANGELOG](${CHANGELOG}) for more details." \
-            --draft=${PRERELEASE} \
-            --prerelease=${PRERELEASE}
+            --draft="${PRERELEASE}" \
+            --prerelease="${PRERELEASE}"
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
