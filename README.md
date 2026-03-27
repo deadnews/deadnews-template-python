@@ -23,5 +23,5 @@ uv tool install deadnews-template-python
 Docker
 
 ```sh
-docker pull ghcr.io/deadnews/deadnews-template-python:latest
+docker pull ghcr.io/deadnews/deadnews-template-python
 ```

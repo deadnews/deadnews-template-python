@@ -38,7 +38,7 @@ jobs:
             type=ref,event=branch
             type=ref,event=pr
 
-      - name: Build and optionaly Push Image
+      - name: Build and optionally Push Image
         uses: docker/build-push-action@d08e5c354a6adb9ed34480a06d141179aa583294 # v7.0.0
         with:
           context: .
