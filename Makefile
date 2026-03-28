@@ -19,8 +19,9 @@ update: up up-ci
 up:
 	uv sync --upgrade
 up-ci:
-	prek auto-update
-	pinact run -update
+	prek auto-update --freeze
+	pindock run --update
+	pinact run --update
 
 run:
 	uv run uvicorn --reload deadnews_template_python:app

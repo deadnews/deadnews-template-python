@@ -11,25 +11,19 @@ permissions:
   contents: read
 
 jobs:
-  lint:
-    name: Lint code
+  prek:
+    name: Prek
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
 
-      - name: Install uv
-        uses: astral-sh/setup-uv@5a095e7a2014a4212f075830d4f7277575a9d098 # v7.3.1
-        with:
-          enable-cache: true
-
-      - name: Install project
-        run: uv sync --frozen
-
-      - name: Lint code
-        run: make lint
+      - name: Run prek
+        uses: j178/prek-action@79f765515bd648eb4d6bb1b17277b7cb22cb6468 # v2.0.0
 
   test:
     name: Tests
+    permissions:
+      contents: write
     strategy:
       fail-fast: false
       matrix:
@@ -40,7 +34,7 @@ jobs:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
 
       - name: Install uv
-        uses: astral-sh/setup-uv@5a095e7a2014a4212f075830d4f7277575a9d098 # v7.3.1
+        uses: astral-sh/setup-uv@37802adc94f370d6bfd71619e3f0bf239e1f3b78 # v7.6.0
         with:
           enable-cache: true
           python-version: ${{ matrix.python-version }}
@@ -51,14 +45,17 @@ jobs:
       - name: Run tests
         run: make test
 
-      - name: Upload coverage to Codecov
-        if: matrix.os == 'ubuntu-latest' && matrix.python-version == '3.14'
-        uses: codecov/codecov-action@671740ac38dd9b0130fbe1cec585b89eea48d3de # v5.5.2
+      - name: Upload coverage
+        uses: deadnews/coverage-badge-action@bc4aaf332f25c52d1e8dd21ef9ed0b2337ad39af # v1.0.0
+        if: github.event_name == 'push' && matrix.os == 'ubuntu-latest'
+        with:
+          file: coverage.lcov
+          type: lcov
 
   pypi-deploy:
     name: Release to PyPI
     if: github.ref_type == 'tag'
-    needs: [lint, test]
+    needs: [prek, test]
     environment: pypi
     permissions:
       id-token: write
@@ -67,20 +64,20 @@ jobs:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
 
       - name: Install uv
-        uses: astral-sh/setup-uv@5a095e7a2014a4212f075830d4f7277575a9d098 # v7.3.1
+        uses: astral-sh/setup-uv@37802adc94f370d6bfd71619e3f0bf239e1f3b78 # v7.6.0
         with:
           enable-cache: true
 
       - name: Build package
         run: uv build
 
-      - name: Publish package to PyPI
+      - name: Publish to PyPI
         uses: pypa/gh-action-pypi-publish@ed0c53931b1dc9bd32cbe73a98c7f6766f8a527e # v1.13.0
 
   github-deploy:
     name: Release to GitHub
     if: github.ref_type == 'tag'
-    needs: [lint, test]
+    needs: [prek, test]
     environment: github-releases
     permissions:
       contents: write
@@ -93,24 +90,24 @@ jobs:
 
       - name: Create GitHub Release
         run: |
-          gh release create ${GITHUB_REF_NAME} \
-            --title ${GITHUB_REF_NAME} \
+          gh release create "${GITHUB_REF_NAME}" \
+            --title "${GITHUB_REF_NAME}" \
             --notes="See [the CHANGELOG](${CHANGELOG}) for more details." \
-            --draft=${PRERELEASE} \
-            --prerelease=${PRERELEASE}
+            --draft="${PRERELEASE}" \
+            --prerelease="${PRERELEASE}"
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   docs-build:
     name: Build docs
     if: github.ref_type == 'tag'
-    needs: [lint, test]
+    needs: [prek, test]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
 
       - name: Install uv
-        uses: astral-sh/setup-uv@5a095e7a2014a4212f075830d4f7277575a9d098 # v7.3.1
+        uses: astral-sh/setup-uv@37802adc94f370d6bfd71619e3f0bf239e1f3b78 # v7.6.0
         with:
           enable-cache: true
 
@@ -118,7 +115,7 @@ jobs:
         run: uv run --frozen mkdocs build
 
       - name: Setup Pages
-        uses: actions/configure-pages@983d7736d9b0ae728b81ab479565c72886d7745b # v5.0.0
+        uses: actions/configure-pages@45bfe0192ca1faeb007ade9deae92b16b8254a0d # v6.0.0
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@7b1f4a764d45c48632c6b24a0339c27f5614fb0b # v4.0.0
@@ -139,4 +136,4 @@ jobs:
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e # v4.0.5
+        uses: actions/deploy-pages@cd2ce8fcbc39b97be8ca5fce6e763baed58fa128 # v5.0.0
