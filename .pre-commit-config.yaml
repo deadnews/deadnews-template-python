@@ -12,12 +12,12 @@ repos:
         args: [--fix=lf]
 
   - repo: https://github.com/rbubley/mirrors-prettier
-    rev: c2bc67fe8f8f549cc489e00ba8b45aa18ee713b1 # frozen: v3.8.1
+    rev: 515f543f5718ebfd6ce22e16708bb32c68ff96e1 # frozen: v3.8.3
     hooks:
       - id: prettier
 
   - repo: https://github.com/crate-ci/typos
-    rev: 02ea592e44b3a53c302f697cddca7641cd051c3d # frozen: v1.45.0
+    rev: bbaefadf97b0ec5fdc942684b647f1a6ab250274 # frozen: v1.46.0
     hooks:
       - id: typos
 
@@ -33,7 +33,7 @@ repos:
       - id: actionlint
 
   - repo: https://github.com/zizmorcore/zizmor-pre-commit
-    rev: ea2eb407b4cbce87cf0d502f36578950494f5ac9 # frozen: v1.23.1
+    rev: a4727cbbcd26d7098e96b9cb738169b59711ae51 # frozen: v1.24.1
     hooks:
       - id: zizmor
         args: [--fix=safe]
@@ -44,7 +44,7 @@ repos:
       - id: taplo-format
 
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: c60c980e561ed3e73101667fe8365c609d19a438 # frozen: v0.15.9
+    rev: 6fec9b7edb08fd9989088709d864a7826dc74e80 # frozen: v0.15.12
     hooks:
       - id: ruff-format
       - id: ruff-check
