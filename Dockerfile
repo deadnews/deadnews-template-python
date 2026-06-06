@@ -1,4 +1,4 @@
-FROM python:3.14.4-alpine@sha256:dd4d2bd5b53d9b25a51da13addf2be586beebd5387e289e798e4083d94ca837a AS base
+FROM python:3.14.5-alpine@sha256:5a824eb82cc75361f98611f3cfc5091ea33f10a6ccea4d4ebdabbc523b9a1614 AS base
 LABEL maintainer="deadnews <deadnewsgit@gmail.com>"
 
 # No .pyc files, tracebacks, real-time logs
@@ -17,7 +17,7 @@ ENV UV_CACHE_DIR="/cache/uv" \
     UV_PYTHON_DOWNLOADS=0
 
 # Install uv
-COPY --from=ghcr.io/astral-sh/uv:0.11.8@sha256:3b7b60a81d3c57ef471703e5c83fd4aaa33abcd403596fb22ab07db85ae91347 \
+COPY --from=ghcr.io/astral-sh/uv:0.11.19@sha256:b46b03ddfcfbf8f547af7e9eaefdf8a39c8cebcba7c98858d3162bd28cf536f6 \
     /uv /bin/uv
 
 # Install dependencies
