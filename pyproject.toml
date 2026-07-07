@@ -9,14 +9,14 @@ keywords        = ["python", "template", "layout"]
 dynamic         = ["version"]
 requires-python = ">=3.14"
 
-dependencies = ["fastapi>=0.122.0", "pydantic>=2.12.5", "uvicorn>=0.38.0"]
+dependencies = ["fastapi>=0.139.0", "pydantic>=2.13.4", "uvicorn>=0.50.2"]
 
 [dependency-groups]
 dev = [
-  "ruff>=0.14.11",
-  "ty>=0.0.11",
-  "pytest>=9.0.1",
-  "pytest-cov>=7.0.0",
+  "ruff>=0.15.11",
+  "ty>=0.0.56",
+  "pytest>=9.1.1",
+  "pytest-cov>=7.1.0",
   "httpx>=0.28.1",
   "mkdocs>=1.6.1",
   "mkdocs-gen-files>=0.6.0",
